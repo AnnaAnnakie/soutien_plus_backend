@@ -1,64 +1,70 @@
-# Spring Boot Project
+# SoutienPlus API (Back-End)
 
-Ce projet utilise le framework **Spring Boot**, une solution puissante pour développer rapidement des applications web ou backend en Java. Spring Boot simplifie la configuration et l'intégration des composants nécessaires au fonctionnement d'une application.
+This repository contains the back-end RESTful API for the **SoutienPlus** project, a peer-tutoring application developed using **Spring Boot**. It handles business logic, database management, and authentication for the client application.
 
-## Fonctionnement de Spring Boot
+## 🔗 Related Repositories
 
-Dans Spring Boot, chaque classe Java peut représenter une entité de la base de données en utilisant l'annotation `@Entity`. Cela permet de mapper directement une classe aux tables de la base de données, simplifiant ainsi la gestion des données.
+* **Front-End Client:** [SoutienPlus Angular Client](https://github.com/AnnaAnnakie/soutien_plus_client.git)
 
-### Points clés :
+## 📋 Prerequisites
 
-1. **Annotations :**  
-   Spring Boot repose sur les annotations pour simplifier les tâches complexes. Par exemple :  
-   - `@Entity` : Définit une classe comme une entité de base de données.  
-   - `@Repository`, `@Service`, `@Controller` : Déclarent les couches de l'application.  
-   - Lombok, avec l'annotation `@Data`, génère automatiquement les getters, setters, et autres méthodes utiles (comme `toString` et `equals`), réduisant ainsi le code boilerplate.
+Ensure you have the following installed before setting up the project:
 
-2. **Spring Data JPA :**  
-   Simplifie l'accès à la base de données grâce à des interfaces comme `JpaRepository`, qui permettent de réaliser des opérations CRUD sans écrire de requêtes SQL explicites.
+* **Java JDK**: `17` or higher
+* **Build Tool**: `Maven` (or use the included `./mvnw` wrapper)
+* **Database**: `PostgreSQL` instance running locally or hosted
 
-3. **Spring Security :**  
-   Fournit des outils robustes pour sécuriser l'application, comme la gestion des utilisateurs et des rôles, ainsi que l'authentification et l'autorisation.
+## 🚀 Getting Started
 
-4. **JWT (JSON Web Token) :**  
-   Permet de gérer l'authentification avec des tokens sécurisés, adaptés aux applications RESTful.
+### 1. Clone the repository
+```bash
+git clone https://github.com/AnnaAnnakie/soutien_plus_backend.git
+cd soutien_plus_backend
+```
 
-## Technologies et dépendances utilisées
+### 2. Database Configuration
+Create a PostgreSQL database named `soutien_plus` (or update your database name accordingly).
 
-Voici les principales dépendances de ce projet :
+Configure your credentials in `src/main/resources/application.properties` (or `application.yml`):
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/soutien_plus
+spring.datasource.username=YOUR_POSTGRES_USER
+spring.datasource.password=YOUR_POSTGRES_PASSWORD
+```
 
-1. **Spring Security** : Pour gérer la sécurité, y compris l'authentification et l'autorisation.
-2. **Lombok** : Pour réduire le code boilerplate en générant automatiquement les méthodes comme `getters`, `setters`, etc.
-3. **Spring Web** : Pour créer des API RESTful.
-4. **Spring Data JPA** : Pour interagir facilement avec la base de données.
-5. **PostgreSQL** : La base de données relationnelle utilisée dans ce projet.
-6. **JWT (JSON Web Token)** : Pour sécuriser les API avec des tokens.
+### 3. Build & Run
+Run the application using the Maven wrapper:
 
-## Structure du projet
+* **Linux/macOS:**
+  ```bash
+  ./mvnw spring-boot:run
+  ```
+* **Windows:**
+  ```cmd
+  mvnw spring-boot:run
+  ```
 
-1. **Entités (Entities)** :  
-   Chaque entité représente une table dans la base de données et est annotée avec `@Entity`.
+By default, the server runs on [http://localhost:8080](http://localhost:8080).
 
-2. **Dépôts (Repositories)** :  
-   Les interfaces héritent de `JpaRepository` pour gérer les opérations CRUD.
+---
 
-3. **Services** :  
-   La logique métier est centralisée ici. Annotés avec `@Service`, ces composants gèrent les traitements entre les contrôleurs et les dépôts.
+## 🏗️ Project Architecture
 
-4. **Contrôleurs (Controllers)** :  
-   Exposent les endpoints RESTful pour interagir avec l'application. Annotés avec `@RestController`.
+The application follows a standard layered architecture:
 
-5. **Sécurité** :  
-   La configuration de Spring Security permet de protéger les ressources de l'application. JWT est utilisé pour gérer les sessions utilisateur.
+* **Controllers (`/controller`)**: Expose RESTful endpoints to communicate with the front-end.
+* **Services (`/service`)**: Encapsulate the core business logic.
+* **Repositories (`/repository`)**: Manage data persistence using Spring Data JPA.
+* **Entities (`/model` or `/entity`)**: Object-relational mapping (ORM) for PostgreSQL tables.
+* **Security (`/security`)**: Configures Spring Security and handles stateless JWT authentication.
 
-## Exécution du projet
+---
 
-### Prérequis :
-- **Java 17+**
-- **Maven** (ou Gradle)
-- **PostgreSQL** installé et configuré
+## 🛠️ Tech Stack & Key Dependencies
 
-### Étapes :
-1. Clonez le projet :  
-   ```bash
-   git clone <URL_DU_REPO>
+* **Spring Boot**: Core framework for backend development
+* **Spring Web**: Building REST APIs
+* **Spring Data JPA**: Database abstraction layer
+* **Spring Security & JWT**: Authentication and role-based access control
+* **PostgreSQL**: Relational database engine
+* **Lombok**: Reduces boilerplate code (Getters, Setters, Builders)
